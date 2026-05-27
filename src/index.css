@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Custom Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+
+/* ─── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --color-primary: #6b5fff;
+  --color-primary-dark: #4c2de4;
+  --color-accent: #f97316;
+  --radius-card: 16px;
+  --shadow-card: 0 4px 40px rgba(0, 0, 0, 0.08);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { @apply bg-gray-100 dark:bg-dark-800; }
+::-webkit-scrollbar-thumb { @apply bg-gray-300 dark:bg-dark-500 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-primary-400; }
+
+/* ─── Shimmer skeleton ──────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+.dark .skeleton {
+  background: linear-gradient(90deg, #1a1a26 25%, #22222f 50%, #1a1a26 75%);
+  background-size: 200% 100%;
+}
+
+/* ─── Glass morphism ────────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.dark .glass {
+  background: rgba(17, 17, 24, 0.7);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ─── Gradient text ─────────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #6b5fff 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Mesh background ───────────────────────────────────────────────────────── */
+.mesh-bg {
+  background-color: #fff;
+  background-image: 
+    radial-gradient(at 40% 20%, hsla(257, 98%, 64%, 0.12) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, hsla(189, 100%, 56%, 0.08) 0px, transparent 50%),
+    radial-gradient(at 10% 80%, hsla(320, 100%, 75%, 0.08) 0px, transparent 50%);
+}
+.dark .mesh-bg {
+  background-color: #0a0a0f;
+  background-image: 
+    radial-gradient(at 40% 20%, hsla(257, 98%, 40%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, hsla(189, 100%, 30%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 10% 80%, hsla(320, 100%, 50%, 0.1) 0px, transparent 50%);
+}
+
+/* ─── Hover card lift ───────────────────────────────────────────────────────── */
+.card-lift {
+  transition: var(--transition-smooth);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(107, 95, 255, 0.15);
+}
+
+/* ─── Animated underline ────────────────────────────────────────────────────── */
+.underline-animate {
+  position: relative;
+}
+.underline-animate::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+.underline-animate:hover::after { width: 100%; }
+
+/* ─── Button styles ─────────────────────────────────────────────────────────── */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+         bg-primary-600 hover:bg-primary-700 text-white font-semibold 
+         rounded-xl transition-all duration-200 shadow-glow-sm 
+         hover:shadow-glow hover:scale-[1.02] active:scale-[0.98];
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3
+         border border-gray-200 dark:border-dark-500 
+         hover:border-primary-400 dark:hover:border-primary-500
+         text-gray-700 dark:text-gray-200 font-semibold rounded-xl 
+         transition-all duration-200 hover:bg-primary-50 dark:hover:bg-primary-950/30;
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2
+         text-gray-600 dark:text-gray-400 hover:text-primary-600 
+         dark:hover:text-primary-400 font-medium rounded-lg
+         transition-all duration-200 hover:bg-primary-50 dark:hover:bg-primary-950/20;
+}
+
+/* ─── Form inputs ───────────────────────────────────────────────────────────── */
+.input {
+  @apply w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-dark-500
+         bg-white dark:bg-dark-700 text-gray-900 dark:text-gray-100
+         placeholder-gray-400 dark:placeholder-gray-500
+         focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent
+         transition-all duration-200;
+}
+
+/* ─── Card ──────────────────────────────────────────────────────────────────── */
+.card {
+  @apply bg-white dark:bg-dark-700 rounded-2xl shadow-card dark:shadow-card-dark
+         border border-gray-100 dark:border-dark-600;
+}
+
+/* ─── Page transition wrapper ───────────────────────────────────────────────── */
+.page-enter {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Mobile nav ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 z-50;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+/* ─── Price tag ─────────────────────────────────────────────────────────────── */
+.price-badge {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 
+         dark:bg-green-900/30 text-green-700 dark:text-green-400 
+         text-xs font-semibold rounded-full;
+}
+
+/* ─── Star rating ───────────────────────────────────────────────────────────── */
+.star-filled { color: #f59e0b; }
+.star-empty { color: #d1d5db; }
+
+/* ─── Selection ─────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(107, 95, 255, 0.2);
+  color: inherit;
+}
+
+/* ─── Swiper custom ─────────────────────────────────────────────────────────── */
+.swiper-pagination-bullet-active {
+  background: var(--color-primary) !important;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px !important;
+  color: var(--color-primary) !important;
+}
+
+/* ─── Range slider ──────────────────────────────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: #e5e7eb;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(107, 95, 255, 0.2);
+}
+
+/* ─── No scrollbar ──────────────────────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
