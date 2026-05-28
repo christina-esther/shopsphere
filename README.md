@@ -2,6 +2,10 @@
 
 <img src="https://img.shields.io/badge/ShopSphere-E--Commerce-6366f1?style=for-the-badge&logo=shopify&logoColor=white" alt="ShopSphere" height="50"/>
 
+## 🏠 Landing Page
+
+![Landing Page](assets/images/landing.png)
+
 # 🛍️ ShopSphere
 
 ### A Modern Full-Stack E-Commerce Platform
